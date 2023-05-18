@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search Results</title>
+  </head>
+  <body>
+    <h1>Search Results</h1>
+    <table>
+      <tr>
+        <th>User</th>
+        <th>Product</th>
+      </tr>
+      {% for result in results %}
+        <tr>
+          <td>{{ result[1] }}</td>
+          <td>{{ result[2] }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

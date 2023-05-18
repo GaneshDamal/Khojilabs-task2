@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search Page</title>
+  </head>
+  <body>
+    <h1>Search Page</h1>
+    <form action="/search" method="post">
+      <label for="user">User:</label>
+      <input type="text" name="user" id="user" autocomplete="off"><br><br>
+
+      <label for="product">Product:</label>
+      <input type="text" name="product" id="product" autocomplete="off"><br><br>
+
+      <table id="search-results">
+        <!-- Search results will be dynamically added here -->
+      </table>
+    </form>
+
+    <script>
+      const userField = document.getElementById('user');
+      const productField = document.getElementById('product');
+      const searchResults = document.getElementById('search-results');
+
+      // Function to fetch search results dynamically
+      const fetchSearchResults = async () => {
+        const userQuery = userField.value;
+        const productQuery = productField.value;
+
+        const response = await fetch('/search', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: `user=${userQuery}&product=${productQuery}`
+        });
+
+        const results = await response.text();
+        searchResults.innerHTML = results;
+      };
+
+      // Event listener for user input changes
+      userField.addEventListener('input', fetchSearchResults);
+      productField.addEventListener('input', fetchSearchResults);
+    </script>
+  </body>
+</html>
